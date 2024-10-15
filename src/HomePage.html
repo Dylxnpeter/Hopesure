@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+        }
+        .header {
+            background-color: #e0f2e9; /* Lighter shade of green */
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 {
+            font-family: 'Raleway', sans-serif; /* Slightly fancy font */
+            margin: 0;
+        }
+        .navbar {
+            display: flex;
+            flex-wrap: wrap; /* Allow items to wrap to the next line if needed */
+            background-color: #2c6e49; /* Leaf green */
+            padding: 10px;
+        }
+        .navbar div {
+            position: relative;
+            display: inline-block;
+            margin: 0 10px; /* Add margin for spacing */
+        }
+        .navbar button {
+            background-color: transparent;
+            border: none;
+            font-size: 16px;
+            color: white;
+            cursor: pointer;
+            padding: 8px 16px;
+        }
+        .navbar button:hover {
+            text-decoration: underline;
+        }
+        .navbar div .dropdown {
+            display: none;
+            position: absolute;
+            background-color: #2c6e49; /* Leaf green */
+            min-width: 160px;
+            max-height: 300px; /* Set maximum height for scrolling */
+            overflow-y: auto; /* Enable vertical scrolling if content overflows */
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            top: 100%; /* Position dropdown below the button */
+            left: 0;
+        }
+        .navbar div:hover .dropdown {
+            display: block;
+        }
+        .dropdown a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown a:hover {
+            background-color: #1f5033; /* Darker leaf green for hover effect */
+        }
+        .form-container {
+            padding: 20px;
+            max-width: 400px;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .form-container label {
+            display: block;
+            margin: 8px 0 4px;
+        }
+        .form-container input, .form-container textarea, .form-container select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-container button {
+            background-color: #2c6e49; /* Leaf green */
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .form-container button:hover {
+            background-color: #1f5033; /* Darker leaf green for hover effect */
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Home Page</h1>
+</div>
+
+<div class="navbar">
+    <div>
+        <button>Member Actions</button>
+        <div class="dropdown">
+            <a href="#" onclick="showForm('memberCaptureForm')">Member Capture</a>
+            <a href="#" onclick="showForm('memberEnquiryForm')">Member Enquiry & Search</a>
+        </div>
+    </div>
+    <div>
+
+        <button>Claims Actions</button>
+        <div class="dropdown">
+            <a href="#" onclick="showForm('fileNewClaimForm')">File a New Claim</a>
+            <a href="#" onclick="showForm('viewClaimStatusForm')">View Claim Status</a>
+            <a href="#" onclick="showForm('updateClaimInformationForm')">Update Claim Information</a>
+            <a href="#" onclick="showForm('approveRejectClaimForm')">Approve/Reject Claim</a>
+            <a href="#" onclick="showForm('processClaimPaymentForm')">Process Claim Payment</a>
+            <a href="#" onclick="showForm('reviewClaimHistoryForm')">Review Claim History</a>
+            <a href="#" onclick="showForm('requestAdditionalInformationForm')">Request Additional Information</a>
+            <a href="#" onclick="showForm('trackClaimProgressForm')">Track Claim Progress</a>
+            <a href="#" onclick="showForm('disputeResolutionForm')">Dispute Resolution</a>
+            <a href="#" onclick="showForm('communicateWithClaimantForm')">Communicate with Claimant</a>
+            <a href="#" onclick="showForm('manageClaimDocumentsForm')">Manage Claim Documents</a>
+        </div>
+    </div>
+    <div>
+        <button>Reports Actions</button>
+        <div class="dropdown">
+            <a href="#">Reports actions selected</a>
+        </div>
+    </div>
+    <div>
+        <button>Monthly Processes Actions</button>
+        <div class="dropdown">
+            <a href="#">Monthly processes actions selected</a>
+        </div>
+    </div>
+    <div>
+        <button>Company Parameters Actions</button>
+        <div class="dropdown">
+            <a href="#">Company parameters actions selected</a>
+        </div>
+    </div>
+    <div>
+        <button>System Settings Actions</button>
+        <div class="dropdown">
+            <a href="#">System settings actions selected</a>
+        </div>
+    </div>
+    <div>
+        <button>Other Actions</button>
+        <div class="dropdown">
+            <a href="#">Other actions selected</a>
+        </div>
+    </div>
+</div>
+
+
+<!-- Add this link in the appropriate place in your homepage.html -->
+<div class="navbar">
+    <!-- Other navbar items -->
+    <div>
+        <button onclick="window.location.href='membermanager.html'">Member Manager</button>
+    </div>
+</div>
+
+
+<!-- Claim Forms -->
+<div id="fileNewClaimForm" class="form-container" style="display: none;">
+    <h2>File a New Claim</h2>
+    <form id="fileNewClaim">
+        <label for="claimTitle">Claim Title:</label>
+        <input type="text" id="claimTitle" name="claimTitle" required>
+        <button type="submit">Submit</button>
+    </form>
+    <p id="fileNewClaimSuccessMessage" style="color: green; display: none;">Claim has been filed.</p>
+</div>
+
+<div id="viewClaimStatusForm" class="form-container" style="display: none;">
+    <h2>View Claim Status</h2>
+    <form id="viewClaimStatus">
+        <label for="claimIdStatus">Claim ID:</label>
+        <input type="text" id="claimIdStatus" name="claimId" required>
+        <button type="submit">Submit</button>
+    </form>
+    <p id="viewClaimStatusSuccessMessage" style="color: green; display: none;">Claim status viewed.</p>
+</div>
+
+<div id="updateClaimInformationForm" class="form-container" style="display: none;">
+    <h2>Update Claim Information</h2>
+    <form id="updateClaimInformation">
+        <label for="claimIdUpdate">Claim ID:</label>
+        <input type="text" id="claimIdUpdate" name="claimId" required>
+        <label for="newClaimInformation">New Information:</label>
+        <textarea id="newClaimInformation" name="newInformation" required></textarea>
+        <button type="submit">Submit</button>
+    </form>
+    <p id="updateClaimInformationSuccessMessage" style="color: green; display: none;">Claim information updated.</p>
+</div>
+
+<div id="approveRejectClaimForm" class="form-container" style="display: none;">
+    <h2>Approve/Reject Claim</h2>
+    <form id="approveRejectClaim">
+        <label for="claimIdApproveReject">Claim ID:</label>
+        <input type="text" id="claimIdApproveReject" name="claimId" required>
+        <label for="approvalDecision">Decision:</label>
+        <select id="approvalDecision" name="decision" required>
+            <option value="approve">Approve</option>
+            <option value="reject">Reject</option>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+    <p id="approveRejectClaimSuccessMessage" style="color: green; display: none;">Claim has been approved/rejected.</p>
+</div>
+
+<div id="processClaimPaymentForm" class="form-container" style="display: none;">
+    <h2>Process Claim Payment</h2>
+    <form id="processClaimPayment">
+        <label for="claimIdPayment">Claim ID:</label>
+        <input type="text" id="claimIdPayment" name="claimId" required>
+        <label for="paymentAmount">Amount:</label>
+        <input type="number" id="paymentAmount" name="amount" required>
+        <button type="submit">Submit</button>
+    </form>
+    <p id="processClaimPaymentSuccessMessage" style="color: green; display: none;">Claim payment processed.</p>
+</div>
+
+<div id="reviewClaimHistoryForm" class="form-container" style="display: none;">
+    <h2>Review Claim History</h2>
+    <form id="reviewClaimHistory">
+        <label for="claimIdHistory">Claim ID:</label>
+        <input type="text" id="claimIdHistory" name="claimId" required>
+        <button type="submit">Submit</button>
+    </form>
+    <p id="reviewClaimHistorySuccessMessage" style="color: green; display: none;">Claim history reviewed.</p>
+</div>
+
+<div id="requestAdditionalInformationForm" class="form-container" style="display: none;">
+    <h2>Request Additional Information</h2>
+    <form id="requestAdditionalInformation">
+        <label for="claimIdRequest">Claim ID:</label>
+        <input type="text" id="claimIdRequest" name="claimId" required>
+        <label for="additionalInformationRequest">Additional Information:</label>
+        <textarea id="additionalInformationRequest" name="additionalInformation" required></textarea>
+        <button type="submit">Submit</button>
+    </form>
+    <p id="requestAdditionalInformationSuccessMessage" style="color: green; display: none;">Requested additional information.</p>
+</div>
+
+<div id="trackClaimProgressForm" class="form-container" style="display: none;">
+    <h2>Track Claim Progress</h2>
+    <form id="trackClaimProgress">
+        <label for="claimIdProgress">Claim ID:</label>
+        <input type="text" id="claimIdProgress" name="claimId" required>
+        <button type="submit">Submit</button>
+    </form>
+    <p id="trackClaimProgressSuccessMessage" style="color: green; display: none;">Claim progress tracked.</p>
+</div>
+
+<div id="disputeResolutionForm" class="form-container" style="display: none;">
+    <h2>Dispute Resolution</h2>
+    <form id="disputeResolution">
+        <label for="claimIdDispute">Claim ID:</label>
+        <input type="text" id="claimIdDispute" name="claimId" required>
+        <label for="disputeResolutionDetails">Resolution Details:</label>
+        <textarea id="disputeResolutionDetails" name="resolutionDetails" required></textarea>
+        <button type="submit">Submit</button>
+    </form>
+    <p id="disputeResolutionSuccessMessage" style="color: green; display: none;">Dispute resolution submitted.</p>
+</div>
+
+<div id="communicateWithClaimantForm" class="form-container" style="display: none;">
+    <h2>Communicate with Claimant</h2>
+    <form id="communicateWithClaimant">
+        <label for="claimIdCommunicate">Claim ID:</label>
+        <input type="text" id="claimIdCommunicate" name="claimId" required>
+        <label for="communicationDetails">Communication Details:</label>
+        <textarea id="communicationDetails" name="communicationDetails" required></textarea>
+        <button type="submit">Submit</button>
+    </form>
+    <p id="communicateWithClaimantSuccessMessage" style="color: green; display: none;">Communicated with claimant.</p>
+</div>
+
+<div id="manageClaimDocumentsForm" class="form-container" style="display: none;">
+    <h2>Manage Claim Documents</h2>
+    <form id="manageClaimDocuments" onsubmit="return manageDocuments(event)">
+        <label for="claimIdDocuments">Claim ID:</label>
+        <input type="text" id="claimIdDocuments" name="claimId" required>
+        <label for="uploadDocuments">Upload Documents:</label>
+        <input type="file" id="uploadDocuments" name="uploadDocuments">
+        <label for="downloadDocuments">Download Documents:</label>
+        <select id="downloadDocuments" name="downloadDocuments">
+            <!-- Options for available documents to download will be populated here dynamically -->
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+    <p id="manageClaimDocumentsSuccessMessage" style="color: green; display: none;">Claim documents managed.</p>
+</div>
+
+<script>
+    function showForm(formId) {
+        // Hide all forms
+        var forms = document.getElementsByClassName('form-container');
+        for (var i = 0; i < forms.length; i++) {
+            forms[i].style.display = 'none';
+        }
+        // Show the selected form
+        document.getElementById(formId).style.display = 'block';
+    }
+
+    // Sample form submission handlers with success messages
+    document.getElementById('fileNewClaim').onsubmit = function(event) {
+        event.preventDefault();
+        document.getElementById('fileNewClaimSuccessMessage').style.display = 'block';
+        setTimeout(function() {
+            document.getElementById('fileNewClaimSuccessMessage').style.display = 'none';
+            showForm(''); // Hide the form
+        }, 2000);
+    };
+
+    document.getElementById('viewClaimStatus').onsubmit = function(event) {
+        event.preventDefault();
+        document.getElementById('viewClaimStatusSuccessMessage').style.display = 'block';
+        setTimeout(function() {
+            document.getElementById('viewClaimStatusSuccessMessage').style.display = 'none';
+            showForm(''); // Hide the form
+        }, 2000);
+    };
+
+    document.getElementById('updateClaimInformation').onsubmit = function(event) {
+        event.preventDefault();
+        document.getElementById('updateClaimInformationSuccessMessage').style.display = 'block';
+        setTimeout(function() {
+            document.getElementById('updateClaimInformationSuccessMessage').style.display = 'none';
+            showForm(''); // Hide the form
+        }, 2000);
+    };
+
+    document.getElementById('approveRejectClaim').onsubmit = function(event) {
+        event.preventDefault();
+        document.getElementById('approveRejectClaimSuccessMessage').style.display = 'block';
+        setTimeout(function() {
+            document.getElementById('approveRejectClaimSuccessMessage').style.display = 'none';
+            showForm(''); // Hide the form
+        }, 2000);
+    };
+
+    document.getElementById('processClaimPayment').onsubmit = function(event) {
+        event.preventDefault();
+        document.getElementById('processClaimPaymentSuccessMessage').style.display = 'block';
+        setTimeout(function() {
+            document.getElementById('processClaimPaymentSuccessMessage').style.display = 'none';
+            showForm(''); // Hide the form
+        }, 2000);
+    };
+
+    document.getElementById('reviewClaimHistory').onsubmit = function(event) {
+        event.preventDefault();
+        document.getElementById('reviewClaimHistorySuccessMessage').style.display = 'block';
+        setTimeout(function() {
+            document.getElementById('reviewClaimHistorySuccessMessage').style.display = 'none';
+            showForm(''); // Hide the form
+        }, 2000);
+    };
+
+    document.getElementById('requestAdditionalInformation').onsubmit = function(event) {
+        event.preventDefault();
+        document.getElementById('requestAdditionalInformationSuccessMessage').style.display = 'block';
+        setTimeout(function() {
+            document.getElementById('requestAdditionalInformationSuccessMessage').style.display = 'none';
+            showForm(''); // Hide the form
+        }, 2000);
+    };
+
+    document.getElementById('trackClaimProgress').onsubmit = function(event) {
+        event.preventDefault();
+        document.getElementById('trackClaimProgressSuccessMessage').style.display = 'block';
+        setTimeout(function() {
+            document.getElementById('trackClaimProgressSuccessMessage').style.display = 'none';
+            showForm(''); // Hide the form
+        }, 2000);
+    };
+
+    document.getElementById('disputeResolution').onsubmit = function(event) {
+        event.preventDefault();
+        document.getElementById('disputeResolutionSuccessMessage').style.display = 'block';
+        setTimeout(function() {
+            document.getElementById('disputeResolutionSuccessMessage').style.display = 'none';
+            showForm(''); // Hide the form
+        }, 2000);
+    };
+
+    document.getElementById('communicateWithClaimant').onsubmit = function(event) {
+        event.preventDefault();
+        document.getElementById('communicateWithClaimantSuccessMessage').style.display = 'block';
+        setTimeout(function() {
+            document.getElementById('communicateWithClaimantSuccessMessage').style.display = 'none';
+            showForm(''); // Hide the form
+        }, 2000);
+    };
+
+    document.getElementById('manageClaimDocuments').onsubmit = function(event) {
+        event.preventDefault();
+        document.getElementById('manageClaimDocumentsSuccessMessage').style.display = 'block';
+        setTimeout(function() {
+            document.getElementById('manageClaimDocumentsSuccessMessage').style.display = 'none';
+            showForm(''); // Hide the form
+        }, 2000);
+    };
+
+    function manageDocuments(event) {
+        event.preventDefault();
+        var claimId = document.getElementById('claimIdDocuments').value;
+        var uploadInput = document.getElementById('uploadDocuments');
+        var downloadSelect = document.getElementById('downloadDocuments');
+
+        // Example of adding uploaded document to the download list
+        if (uploadInput.files.length > 0) {
+            var fileName = uploadInput.files[0].name;
+            var option = document.createElement('option');
+            option.value = fileName;
+            option.text = fileName;
+            downloadSelect.appendChild(option);
+        }
+
+        // Simulate download documents population
+        // In a real application, you would populate the dropdown with existing documents from the server
+        if (claimId) {
+            var existingDocuments = ["document1.pdf", "document2.jpg"]; // Example existing documents
+            downloadSelect.innerHTML = ''; // Clear existing options
+            existingDocuments.forEach(function(doc) {
+                var option = document.createElement('option');
+                option.value = doc;
+                option.text = doc;
+                downloadSelect.appendChild(option);
+            });
+        }
+
+        document.getElementById('manageClaimDocumentsSuccessMessage').style.display = 'block';
+        setTimeout(function() {
+            document.getElementById('manageClaimDocumentsSuccessMessage').style.display = 'none';
+            showForm(''); // Hide the form
+        }, 2000);
+    }
+</script>
+
+</body>
+</html>

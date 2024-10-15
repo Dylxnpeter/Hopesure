@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hopesure Insurance System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .login-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+        }
+        .login-container label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .login-container input, .login-container select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .login-container button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Hopesure Insurance System</h2>
+    <form id="loginForm">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="branch">Branch</label>
+        <select id="branch" name="branch" required>
+            <option value="">Select Branch</option>
+            <option value="Klerksdorp">Klerksdorp</option>
+            <option value="Mthatha">Mthatha</option>
+            <option value="Taung">Taung</option>
+            <option value="Rustenburg">Rustenburg</option>
+            <option value="Newcastle">Newcastle</option>
+            <option value="Bothshabelo">Bothshabelo</option>
+            <option value="Emphangeni">Emphangeni</option>
+            <option value="Johannesburg">Johannesburg</option>
+            <option value="Zeerust">Zeerust</option>
+            <option value="Hartswater">Hartswater</option>
+        </select>
+
+        <label for="captcha">Captcha</label>
+        <div>
+            <img src="path/to/captcha_image" alt="Captcha Image">
+            <input type="text" id="captcha" name="captcha" required>
+        </div>
+
+        <button type="button" onclick="validateLogin()">Login</button>
+    </form>
+</div>
+
+<script>
+    function validateLogin() {
+        // Replace with your actual authentication logic
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const branch = document.getElementById('branch').value;
+        const captcha = document.getElementById('captcha').value;
+
+        // Example: Assume validation succeeds
+        const isValid = true; // Replace with actual validation logic
+
+        if (isValid) {
+            // Redirect to homepage.html upon successful login
+            window.location.href = 'homepage.html';
+        } else {
+            alert('Invalid credentials. Please try again.');
+            // Optionally, clear the form fields or perform other actions
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('captcha').value = '';
+        }
+    }
+</script>
+
+</body>
+</html>

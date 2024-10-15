@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claims Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .button-container button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .button-container button:hover {
+            background-color: #45a049;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .form-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .form-container input[type="text"],
+        .form-container textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .form-container button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Claims Manager</h1>
+</header>
+<div class="container">
+    <div class="button-container">
+        <button onclick="showForm('fileNewClaim')">File a New Claim</button>
+        <button onclick="showForm('viewClaimStatus')">View Claim Status</button>
+        <button onclick="showForm('updateClaimInformation')">Update Claim Information</button>
+        <button onclick="showForm('approveRejectClaim')">Approve/Reject Claim</button>
+        <button onclick="showForm('processClaimPayment')">Process Claim Payment</button>
+        <button onclick="showForm('reviewClaimHistory')">Review Claim History</button>
+        <button onclick="showForm('requestAdditionalInformation')">Request Additional Information</button>
+        <button onclick="showForm('trackClaimProgress')">Track Claim Progress</button>
+        <button onclick="showForm('disputeResolution')">Dispute Resolution</button>
+        <button onclick="showForm('communicateWithClaimant')">Communicate with Claimant</button>
+        <button onclick="showForm('manageClaimDocuments')">Manage Claim Documents</button>
+    </div>
+    <div id="formContainer" class="form-container" style="display: none;">
+        <form id="form" onsubmit="handleSubmit(event)">
+            <div id="formFields"></div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+<script>
+    function showForm(formType) {
+        const formContainer = document.getElementById('formContainer');
+        const formFields = document.getElementById('formFields');
+        formFields.innerHTML = ''; // Clear previous fields
+
+        switch(formType) {
+            case 'fileNewClaim':
+                formFields.innerHTML = `
+                        <label for="claimId">Claim ID:</label>
+                        <input type="text" id="claimId" name="claimId" required>
+                        <label for="claimDetails">Claim Details:</label>
+                        <textarea id="claimDetails" name="claimDetails" rows="4" required></textarea>
+                    `;
+                break;
+            case 'viewClaimStatus':
+                formFields.innerHTML = `
+                        <label for="claimId">Claim ID:</label>
+                        <input type="text" id="claimId" name="claimId" required>
+                    `;
+                break;
+            case 'updateClaimInformation':
+                formFields.innerHTML = `
+                        <label for="claimId">Claim ID:</label>
+                        <input type="text" id="claimId" name="claimId" required>
+                        <label for="newClaimInfo">New Claim Information:</label>
+                        <textarea id="newClaimInfo" name="newClaimInfo" rows="4" required></textarea>
+                    `;
+                break;
+            case 'approveRejectClaim':
+                formFields.innerHTML = `
+                        <label for="claimId">Claim ID:</label>
+                        <input type="text" id="claimId" name="claimId" required>
+                        <label for="action">Action (approve/reject):</label>
+                        <input type="text" id="action" name="action" required>
+                    `;
+                break;
+            case 'processClaimPayment':
+                formFields.innerHTML = `
+                        <label for="claimId">Claim ID:</label>
+                        <input type="text" id="claimId" name="claimId" required>
+                        <label for="paymentAmount">Payment Amount:</label>
+                        <input type="text" id="paymentAmount" name="paymentAmount" required>
+                    `;
+                break;
+            case 'reviewClaimHistory':
+                formFields.innerHTML = `
+                        <label for="claimId">Claim ID:</label>
+                        <input type="text" id="claimId" name="claimId" required>
+                    `;
+                break;
+            case 'requestAdditionalInformation':
+                formFields.innerHTML = `
+                        <label for="claimId">Claim ID:</label>
+                        <input type="text" id="claimId" name="claimId" required>
+                        <label for="additionalInfo">Additional Information:</label>
+                        <textarea id="additionalInfo" name="additionalInfo" rows="4" required></textarea>
+                    `;
+                break;
+            case 'trackClaimProgress':
+                formFields.innerHTML = `
+                        <label for="claimId">Claim ID:</label>
+                        <input type="text" id="claimId" name="claimId" required>
+                    `;
+                break;
+            case 'disputeResolution':
+                formFields.innerHTML = `
+                        <label for="claimId">Claim ID:</label>
+                        <input type="text" id="claimId" name="claimId" required>
+                        <label for="disputeDetails">Dispute Details:</label>
+                        <textarea id="disputeDetails" name="disputeDetails" rows="4" required></textarea>
+                    `;
+                break;
+            case 'communicateWithClaimant':
+                formFields.innerHTML = `
+                        <label for="claimId">Claim ID:</label>
+                        <input type="text" id="claimId" name="claimId" required>
+                        <label for="communication">Communication:</label>
+                        <textarea id="communication" name="communication" rows="4" required></textarea>
+                    `;
+                break;
+            case 'manageClaimDocuments':
+                formFields.innerHTML = `
+                        <label for="claimId">Claim ID:</label>
+                        <input type="text" id="claimId" name="claimId" required>
+                        <label for="documentDetails">Document Details:</label>
+                        <textarea id="documentDetails" name="documentDetails" rows="4" required></textarea>
+                    `;
+                break;
+        }
+        formContainer.style.display = 'block';
+    }
+
+    function handleSubmit(event) {
+        event.preventDefault();
+        // Here you can handle form submission, send data to the server, etc.
+        alert('Form submitted!');
+    }
+</script>
+</body>
+</html>

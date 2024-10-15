@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <button onclick="showMemberCaptureForm()">Member Capture</button>
+    <button onclick="showMemberEnquiryForm()">Member Enquiry & Search</button>
+</div>
+
+<!-- Member Capture Form -->
+<div id="memberCaptureForm" class="hidden">
+    <h2>Member Capture Form</h2>
+    <div class="form-group">
+        <label for="title">Title:</label>
+        <select id="title">
+            <option value="">Select Title</option>
+            <option value="Mr">Mr</option>
+            <option value="Mrs">Mrs</option>
+            <option value="Sir">Sir</option>
+            <option value="Miss">Miss</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="gender">Gender:</label>
+        <select id="gender">
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+    </div>
+    <!-- Add form fields for First Name, Surname, etc. -->
+    <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName">
+    </div>
+    <div class="form-group">
+        <label for="surname">Surname:</label>
+        <input type="text" id="surname">
+    </div>
+    <div class="form-group">
+        <label for="id">ID:</label>
+        <input type="text" id="id">
+    </div>
+    <div class="form-group">
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="text" id="phoneNumber">
+    </div>
+    <div class="form-group">
+        <label for="email">Email Address:</label>
+        <input type="text" id="email">
+    </div>
+    <div class="form-group">
+        <label for="employer">Employer:</label>
+        <input type="text" id="employer">
+    </div>
+    <div class="form-group">
+        <label for="streetAddress">Street Address:</label>
+        <input type="text" id="streetAddress">
+    </div>
+    <div class="form-group">
+        <label for="dob">Date of Birth (dd-MM-yyyy):</label>
+        <input type="text" id="dob">
+    </div>
+    <div class="form-group">
+        <label for="city">City:</label>
+        <input type="text" id="city">
+    </div>
+    <div class="form-group">
+        <label for="province">Province:</label>
+        <input type="text" id="province">
+    </div>
+    <div class="form-group">
+        <label for="telephoneNumber">Telephone Number:</label>
+        <input type="text" id="telephoneNumber">
+    </div>
+    <div class="form-group">
+        <label for="alternativeNumber">Alternative Number:</label>
+        <input type="text" id="alternativeNumber">
+    </div>
+    <div class="form-group">
+        <label for="occupation">Occupation:</label>
+        <input type="text" id="occupation">
+    </div>
+    <div class="form-group">
+        <label for="postalCode">Postal Code:</label>
+        <input type="text" id="postalCode">
+    </div>
+    <button onclick="submitMemberDetails()">Submit</button>
+</div>
+
+<!-- Member Enquiry Form -->
+<div id="memberEnquiryForm" class="hidden">
+    <h2>Member Enquiry & Search</h2>
+    <div class="form-group">
+        <label for="searchCriteria">Search by:</label>
+        <select id="searchCriteria">
+            <option value="">Select Search Criteria</option>
+            <option value="Member ID">Member ID</option>
+            <option value="Phone Number">Phone Number</option>
+            <option value="Email Address">Email Address</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="searchValue">Enter search value:</label>
+        <input type="text" id="searchValue">
+    </div>
+    <button onclick="searchMember()">Search</button>
+</div>
+
+<script>
+    function showMemberCaptureForm() {
+        document.getElementById('memberCaptureForm').classList.remove('hidden');
+        document.getElementById('memberEnquiryForm').classList.add('hidden');
+    }
+
+    function showMemberEnquiryForm() {
+        document.getElementById('memberEnquiryForm').classList.remove('hidden');
+        document.getElementById('memberCaptureForm').classList.add('hidden');
+    }
+
+    function submitMemberDetails() {
+        // Retrieve values from form fields
+        var title = document.getElementById('title').value;
+        var gender = document.getElementById('gender').value;
+        var firstName = document.getElementById('firstName').value;
+        var surname = document.getElementById('surname').value;
+        var id = document.getElementById('id').value;
+        var phoneNumber = document.getElementById('phoneNumber').value;
+        var email = document.getElementById('email').value;
+        var employer = document.getElementById('employer').value;
+        var streetAddress = document.getElementById('streetAddress').value;
+        var dob = document.getElementById('dob').value;
+        var city = document.getElementById('city').value;
+        var province = document.getElementById('province').value;
+        var telephoneNumber = document.getElementById('telephoneNumber').value;
+        var alternativeNumber = document.getElementById('alternativeNumber').value;
+        var occupation = document.getElementById('occupation').value;
+        var postalCode = document.getElementById('postalCode').value;
+
+        // Implement AJAX request to send data to the server
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'saveMemberDetails.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                alert('Member details saved successfully.');
+                document.getElementById('memberCaptureForm').reset();
+            } else {
+                alert('Failed to save member details.');
+            }
+        };
+        xhr.send('title=' + encodeURIComponent(title) +
+            '&gender=' + encodeURIComponent(gender) +
+            '&firstName=' + encodeURIComponent(firstName) +
+            '&surname=' + encodeURIComponent(surname) +
+            '&id=' + encodeURIComponent(id) +
+            '&phoneNumber=' + encodeURIComponent(phoneNumber) +
+            '&email=' + encodeURIComponent(email) +
+            '&employer=' + encodeURIComponent(employer) +
+            '&streetAddress=' + encodeURIComponent(streetAddress) +
+            '&dob=' + encodeURIComponent(dob) +
+            '&city=' + encodeURIComponent(city) +
+            '&province=' + encodeURIComponent(province) +
+            '&telephoneNumber=' + encodeURIComponent(telephoneNumber) +
+            '&alternativeNumber=' + encodeURIComponent(alternativeNumber) +
+            '&occupation=' + encodeURIComponent(occupation) +
+            '&postalCode=' + encodeURIComponent(postalCode));
+    }
+
+    function searchMember() {
+        var searchCriteria = document.getElementById('searchCriteria').value;
+        var searchValue = document.getElementById('searchValue').value;
+
+        // Implement AJAX request to perform search
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'searchMember.php?criteria=' + encodeURIComponent(searchCriteria) + '&value=' + encodeURIComponent(searchValue), true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.found) {
+                    alert('Member Found: ' + 'Name: ' + response.firstName + ' ' + response.surname + '\nID: ' + response.id + '\nPhone Number: ' + response.phoneNumber);
+                } else {
+                    alert('No member found.');
+                }
+            } else {
+                alert('Failed to search for member.');
+            }
+        };
+        xhr.send();
+    }
+</script>
+</body>
+</html>
